@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #11100e;
+  --muted: #6f6a60;
+  --border: #e9e6e0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+:focus-visible {
+  outline: 2px solid #0a0a0a;
+  outline-offset: 2px;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.product-card .primary-image {
+  transition: opacity 0.35s ease;
+}
+.product-card .secondary-image {
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.product-card:hover .primary-image {
+  opacity: 0;
+}
+.product-card:hover .secondary-image {
+  opacity: 1;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+h1, h2, h3, h4 { letter-spacing: -0.015em; }
+button { font-family: inherit; }
+::selection { background: #11100e; color: #fff; }
+
+/* Announcement marquee */
+@keyframes mu-announce { to { transform: translateX(-50%); } }
+.mu-announce-track { animation: mu-announce 38s linear infinite; }
+.mu-announce:hover .mu-announce-track { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .mu-announce-track { animation: none; } }
+
+/* Liquid-glass header (applies once the page is scrolled) */
+.glass {
+  background: linear-gradient(135deg, rgba(255,255,255,.55), rgba(255,255,255,.28));
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  backdrop-filter: blur(22px) saturate(180%);
+  border-bottom: 1px solid rgba(255,255,255,.55);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 10px 30px -12px rgba(17,16,14,.18);
+}
+@keyframes mu-pop { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: none; } }
+.mu-pop { animation: mu-pop .22s ease-out; }
+
+/* Shared button styles */
+.btn { display: inline-flex; align-items: center; justify-content: center; transition: background .2s, color .2s, border-color .2s; }
+.btn-primary { background: #11100e; color: #fff; }
+.btn-primary:hover { background: #2b2925; }
+.btn-outline { border: 1px solid #11100e; color: #11100e; background: transparent; }
+.btn-outline:hover { background: #11100e; color: #fff; }
