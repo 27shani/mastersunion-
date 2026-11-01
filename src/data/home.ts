@@ -18,7 +18,7 @@ export const announcements = [
   "Premium merch for everyday ambition",
 ];
 
-export const heroImage = "/images/hero.jpg";
+export const heroImage = "/images/hero.png";
 
 export const megaTiles = [
   { name: "Drinkware", href: "/collections/drinkware-1", img: `${CDN}/Woman_sipping_coffee_202604051736.jpg?v=1775645173&width=1024` },
