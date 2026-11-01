@@ -38,12 +38,12 @@ function Logo({ white, className }: { white: boolean; className?: string }) {
 
 function CollectionRows({ onPick }: { onPick: () => void }) {
   return (
-    <ul className="max-w-2xl">
+    <ul className="max-w-[640px]">
       {megaTiles.map((c) => (
-        <li key={c.href} className="border-b border-neutral-300/70">
-          <Link href={c.href} onClick={onPick} className="flex items-center gap-4 py-2.5">
+        <li key={c.href} className="border-b border-neutral-200">
+          <Link href={c.href} onClick={onPick} className="flex items-center gap-4 py-1.5">
             <span className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-neutral-200"><Image src={c.img} alt="" fill sizes="64px" className="object-cover" /></span>
-            <span className="text-sm">{c.name}</span>
+            <span className="text-[13px]">{c.name}</span>
           </Link>
         </li>
       ))}
@@ -63,8 +63,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mega, setMega] = useState(false);
   const isHome = usePathname() === "/";
-  // Transparent at the top of the home page (white logo/icons over the hero); black once scrolled.
-  const overHero = isHome && !scrolled && !mega && !searchOpen;
+  // Transparent at the top of the home page; liquid glass once scrolled. Logo and icons are always black.
 
   const openSearch = () => { setPanelTop(headerRef.current?.getBoundingClientRect().bottom ?? 0); setSearchOpen(true); };
   const closeSearch = () => { setSearchOpen(false); setQuery(""); };
@@ -100,7 +99,7 @@ export default function Header() {
 
   const iconBtn = "relative flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-black/5";
   const badge = "absolute right-1 top-1 flex h-[15px] min-w-[15px] items-center justify-center rounded-full bg-black px-1 text-[9px] font-medium text-white";
-  const iconGroup = cn("flex items-center rounded-full transition-colors", overHero ? "text-white" : "bg-white/80 px-0.5 text-neutral-950 shadow-sm backdrop-blur-md lg:bg-transparent lg:px-0 lg:shadow-none lg:backdrop-blur-none");
+  const iconGroup = "flex items-center rounded-full bg-white/80 px-0.5 text-neutral-950 shadow-sm backdrop-blur-md transition-colors lg:bg-transparent lg:px-0 lg:shadow-none lg:backdrop-blur-none";
 
   return (
     <>
@@ -114,14 +113,14 @@ export default function Header() {
         onMouseLeave={() => setMega(false)}
         onKeyDown={(e) => e.key === "Escape" && setMega(false)}
       >
-        <div className={cn("transition-colors duration-300", overHero ? "text-white" : "text-neutral-950")}>
+        <div className="text-neutral-950">
           {/* Mobile header: no bar background, just a floating menu pill + icons */}
           <div className="flex h-14 items-center justify-between px-3 lg:hidden">
-            <div className={cn("flex items-center gap-2 rounded-full py-1 pl-1 pr-4 backdrop-blur-md transition-colors", overHero ? "bg-neutral-800/45 text-white" : "bg-white/80 text-neutral-950 shadow-sm")}>
-              <button onClick={() => setMenuOpen(true)} className={cn("flex h-8 w-8 items-center justify-center rounded-full", overHero ? "bg-white/20" : "bg-neutral-100")} aria-label="Open menu">
+            <div className={"flex items-center gap-2 rounded-full bg-white/80 py-1 pl-1 pr-4 text-neutral-950 shadow-sm backdrop-blur-md"}>
+              <button onClick={() => setMenuOpen(true)} className={"flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100"} aria-label="Open menu">
                 <IconMenu className="h-4 w-4" />
               </button>
-              <Link href="/" aria-label="Master's Union home" className="flex items-center"><Logo white={overHero} className="h-7" /></Link>
+              <Link href="/" aria-label="Master's Union home" className="flex items-center"><Logo white={false} className="h-7" /></Link>
             </div>
             <div className={iconGroup}>
               <button onClick={openSearch} className={iconBtn} aria-label="Search"><IconSearch className="h-5 w-5" /></button>
@@ -143,7 +142,7 @@ export default function Header() {
               <button onMouseEnter={() => setMega(true)} onFocus={() => setMega(true)} aria-expanded={mega} aria-haspopup="true">Collections</button>
               <Link href="/contact" onMouseEnter={() => setMega(false)}>Contact</Link>
             </nav>
-            <Link href="/" aria-label="Master's Union home" className="justify-self-center"><Logo white={overHero} className="h-11" /></Link>
+            <Link href="/" aria-label="Master's Union home" className="justify-self-center"><Logo white={false} className="h-11" /></Link>
             <div className="flex items-center justify-end gap-1">
               <button onClick={searchOpen ? closeSearch : openSearch} className={iconBtn} aria-label="Search"><IconSearch className="h-5 w-5" /></button>
               <Link href="/wishlist" className={iconBtn} aria-label="Wishlist">
@@ -181,21 +180,21 @@ export default function Header() {
       {searchOpen && (
         <>
           <button className="fixed inset-0 z-[55] bg-black/25 backdrop-blur-md" onClick={closeSearch} aria-label="Close search" />
-          <div className="mu-pop fixed inset-x-0 z-[56] overflow-y-auto rounded-b-3xl bg-white px-4 pb-8 pt-3 lg:px-6" style={{ top: panelTop, maxHeight: `calc(100svh - ${panelTop}px)` }} role="dialog" aria-modal="true" aria-label="Search">
+          <div className="mu-pop fixed inset-x-0 z-[56] overflow-y-auto rounded-b-3xl bg-white px-4 pb-6 pt-2 lg:px-6" style={{ top: panelTop, maxHeight: `calc(100svh - ${panelTop}px)` }} role="dialog" aria-modal="true" aria-label="Search">
             <div className="flex items-center gap-3 lg:gap-5">
               <div className="flex h-12 flex-1 items-center rounded-full bg-neutral-100 px-5 lg:h-14 lg:px-6">
-                <input autoFocus value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search here...." className="h-full flex-1 bg-transparent text-sm outline-none placeholder:text-neutral-400" />
+                <input autoFocus value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search here...." className="h-full flex-1 bg-transparent text-[12px] outline-none focus:outline-none focus-visible:outline-none placeholder:text-neutral-400" />
                 <IconSearch className="h-5 w-5 text-neutral-400" />
               </div>
               <button onClick={closeSearch} aria-label="Close search" className="p-2"><IconClose className="h-5 w-5" /></button>
             </div>
-            <h2 className="mb-3 mt-7 text-[15px] font-semibold">{q.length > 1 ? "Products" : "Collections"}</h2>
+            <h2 className="mb-3 mt-6 text-[15px] font-semibold">{q.length > 1 ? "Products" : "Collections"}</h2>
             {q.length > 1 ? (
               results.length ? (
-                <ul className="max-w-2xl">
+                <ul className="max-w-[640px]">
                   {results.map((p) => (
                     <li key={p.id} className="border-b border-neutral-300/70">
-                      <Link href={`/products/${p.slug}`} onClick={closeSearch} className="flex items-center gap-4 py-2.5">
+                      <Link href={`/products/${p.slug}`} onClick={closeSearch} className="flex items-center gap-4 py-1.5">
                         <span className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-neutral-100"><Image src={p.images[0].src} alt="" fill sizes="64px" className="object-cover" /></span>
                         <span><span className="block text-sm">{p.name}</span><span className="text-xs text-neutral-500">{formatPrice(p.price)}</span></span>
                       </Link>
