@@ -268,7 +268,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                     onClick={() => setActiveTab(tab)}
                     className={cn("flex-1 pb-2.5 text-center text-[12px] font-medium transition lg:text-[13px]", activeTab === tab ? "border-b-2 border-black text-black" : "text-neutral-400")}
                   >
-                    {tab === "details" ? "Details & Description" : tab === "washcare" ? "Washcare" : "Shipping"}
+                    {tab === "details" ? "Description" : tab === "washcare" ? "Washcare" : "Shipping"}
                   </button>
                 ))}
               </div>
