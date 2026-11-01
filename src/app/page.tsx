@@ -37,7 +37,7 @@ export default function HomePage() {
   return (
     <div className="bg-canvas">
       {/* HERO — fits the screen height on desktop */}
-      <section className="relative -mt-14 w-full aspect-[3/4] sm:aspect-[16/10] max-h-[88vh] lg:-mt-[76px] lg:aspect-auto lg:max-h-none lg:h-[100svh] overflow-hidden bg-neutral-900">
+      <section className="relative -mt-14 w-full aspect-[3/4] sm:aspect-[16/10] max-h-[88vh] lg:-mt-20 lg:aspect-auto lg:max-h-none lg:h-[100svh] overflow-hidden bg-neutral-900">
         <Image
           src={heroImage}
           alt="Master's Union merchandise"
@@ -47,8 +47,6 @@ export default function HomePage() {
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
-        {/* darkens the top edge so the white logo and icons stay readable on the light photo */}
-        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/45 to-transparent lg:h-44" />
         <div className="absolute inset-x-0 bottom-0 flex flex-col items-center px-6 pb-10 sm:pb-14 lg:pb-12">
           <Link href="/collections/all" className="border-b border-white pb-0.5 text-[14px] font-medium tracking-wide text-white lg:text-[15px]">
             Shop now
