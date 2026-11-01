@@ -100,3 +100,6 @@ button { font-family: inherit; }
 .btn-primary:hover { background: #2b2925; }
 .btn-outline { border: 1px solid #11100e; color: #11100e; background: transparent; }
 .btn-outline:hover { background: #11100e; color: #fff; }
+
+/* Text fields draw their own focus style; skip the global black outline on them */
+input:focus-visible, textarea:focus-visible, select:focus-visible { outline: none; }
