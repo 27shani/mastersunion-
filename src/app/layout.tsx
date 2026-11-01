@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Pinyon_Script } from "next/font/google";
 import "./globals.css";
 import { StoreProvider } from "@/context/StoreContext";
 import Header from "@/components/Header";
@@ -8,6 +8,8 @@ import AnnouncementBar from "@/components/AnnouncementBar";
 import CheckoutSheet from "@/components/CheckoutSheet";
 import ChatWidget from "@/components/ChatWidget";
 import { CheckoutProvider } from "@/context/CheckoutContext";
+
+const script = Pinyon_Script({ variable: "--font-script", subsets: ["latin"], weight: "400" });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,7 +27,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geistSans.variable} h-full antialiased`}>
+    <html lang="en" className={`${geistSans.variable} ${script.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-canvas text-neutral-900">
         <StoreProvider>
           <CheckoutProvider>
